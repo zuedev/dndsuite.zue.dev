@@ -1,0 +1,5 @@
+{
+  "systems": {
+    "alchemy": "@import('/data/default/alchemy.json')"
+  }
+}

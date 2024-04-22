@@ -1,10 +1,3 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-} from "@clerk/nextjs";
-
 const links = [
   { href: "/", text: "Home" },
   {
@@ -70,14 +63,7 @@ export default function Navigation() {
           ))}
         </div>
       </div>
-      <div>
-        <SignedIn>
-          <SignOutButton className="bg-red-500 text-white px-2 py-1" />
-        </SignedIn>
-        <SignedOut>
-          <SignInButton className="bg-blue-500 text-white px-2 py-1" />
-        </SignedOut>
-      </div>
+      <div>AuthSection</div>
     </nav>
   );
 }

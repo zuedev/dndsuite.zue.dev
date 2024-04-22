@@ -1,14 +1,19 @@
-"use client";
-
-import { signIn } from "next-auth/react";
+import { signIn } from "@/auth";
 
 export function SignInButton() {
   return (
-    <button
-      onClick={() => signIn()}
-      className="bg-[#5865f2] hover:bg-[#4853a4] px-2 py-1"
+    <form
+      action={async () => {
+        "use server";
+        await signIn("discord");
+      }}
     >
-      Login
-    </button>
+      <button
+        type="submit"
+        className="bg-[#5865f2] hover:bg-[#4853a4] px-2 py-1"
+      >
+        Login
+      </button>
+    </form>
   );
 }

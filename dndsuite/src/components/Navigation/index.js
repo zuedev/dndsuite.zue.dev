@@ -1,25 +1,32 @@
-const links = [
-  { href: "/", text: "Home" },
-  {
-    href: null,
-    text: "Tools",
-    dropdown: [
-      {
-        href: "/ledger",
-        text: "Ledger",
-        className: "line-through text-gray-500 cursor-not-allowed",
-        title: "Coming soon!",
-      },
-    ],
-  },
-  {
-    href: "https://github.com/zuedev/dndsuite.zue.dev",
-    text: "Development",
-    target: "_blank",
-  },
-];
+import { SignInButton } from "@/components/SignInButton";
+import { SignOutButton } from "@/components/SignOutButton";
 
-export default function Navigation() {
+import { auth } from "@/auth";
+
+export default async function Navigation() {
+  const links = [
+    { href: "/", text: "Home" },
+    {
+      href: null,
+      text: "Tools",
+      dropdown: [
+        {
+          href: "/ledger",
+          text: "Ledger",
+          className: "line-through text-gray-500 cursor-not-allowed",
+          title: "Coming soon!",
+        },
+      ],
+    },
+    {
+      href: "https://github.com/zuedev/dndsuite.zue.dev",
+      text: "Development",
+      target: "_blank",
+    },
+  ];
+
+  const { user } = (await auth()) || {};
+
   return (
     <nav className="flex justify-between items-center p-4 h-16 bg-black text-white">
       <div className="flex items-center space-x-4">
@@ -63,7 +70,23 @@ export default function Navigation() {
           ))}
         </div>
       </div>
-      <div>AuthSection</div>
+      <div className="flex items-center space-x-4">
+        {(user && (
+          <>
+            <img
+              src={user.image}
+              alt={user.name}
+              className="h-8 rounded-full border-2 border-white"
+            />
+            <span>Hello, {user.name}!</span>
+            <SignOutButton />
+          </>
+        )) || (
+          <>
+            <SignInButton />
+          </>
+        )}
+      </div>
     </nav>
   );
 }
